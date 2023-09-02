@@ -7,25 +7,34 @@ public class Logistica {
     float[][] matCustoLog = new float[maxTam][maxTam];
 
 
-    public void insereFilial(String[][] matLogistica, int maxTam){
-
+    public void insereFilial(String[][] matLogistica, int maxTam) {
         System.out.println("::::::::::Inserir Filial::::::::::\nInsira a filial: ");
         String filial = scanner.nextLine();
 
-        // Encontre a primeira linha vazia na matriz
-        int linhaVazia = -1;
+        boolean filialJaInserida = false;
         for (int i = 0; i < maxTam; i++) {
-            if (matLogistica[i][0] == null) {
-                linhaVazia = i;
+            if (matLogistica[i][0] != null && matLogistica[i][0].equals(filial)) {
+                filialJaInserida = true;
+                System.out.println("Erro. Filial já cadastrada.");
                 break;
             }
         }
 
-        if (linhaVazia != -1) {
-            matLogistica[linhaVazia][0] = filial;
-            System.out.println("Filial inserida com sucesso\n");
-        } else {
-            System.out.println("Erro: Não há mais linhas vazias na matriz.");
+        if (!filialJaInserida) {
+            int linhaVazia = -1;
+            for (int i = 0; i < maxTam; i++) {
+                if (matLogistica[i][0] == null) {
+                    linhaVazia = i;
+                    break;
+                }
+            }
+
+            if (linhaVazia != -1) {
+                matLogistica[linhaVazia][0] = filial;
+                System.out.println("Filial inserida com sucesso\n");
+            } else {
+                System.out.println("Erro: armazenamento cheio.");
+            }
         }
     }
 
@@ -44,7 +53,7 @@ public class Logistica {
         System.out.print("Selecione as duas filiais pelo seu numero:\n");
 
         listaFiliais(matLogistica);
-        System.out.println("\nPrimeira filial: ");
+        System.out.println("\n\nPrimeira filial: ");
         filial1 = scanner.nextInt();
         scanner.nextLine();
 
@@ -80,7 +89,7 @@ public class Logistica {
     public void menuLogistica(){
         int opc;
 
-        System.out.println(":::::::::: Menu Logistica ::::::::::");
+        System.out.println("\n:::::::::: Menu Logistica ::::::::::");
         System.out.print("1. Insere filial\n" +
                         "2. Insere custo de movimentação\n" +
                         "3. Lista filiais\n" +
@@ -109,7 +118,7 @@ public class Logistica {
                 break;
             case 2:
                 insereCusto(matCustoLog, matLogistica, maxTam);
-
+                menuLogistica();
                 break;
             case 3:
                 listaFiliais(matLogistica);
