@@ -47,6 +47,38 @@ public class Logistica {
         System.out.println("\n");
     }
 
+    public void atualizaCusto(String[][] matLogistica){
+        int filialP1, filialP2, novoCusto, escolha;
+
+        System.out.print("::::::::::Atualizar Custo de Deslocamento::::::::::\n");
+        System.out.print("Selecione as duas filiais pelo seu numero:\n");
+
+        listaFiliais(matLogistica);
+
+        System.out.println("Nao encontrou a filial?\n1. Encontrei minha filial\n2. Inserir filial");
+        escolha = scanner.nextInt();
+        scanner.nextLine();
+
+        if(escolha == 1){
+            System.out.println("\n\nPrimeira filial: ");
+            filialP1 = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.println("Segunda filial: ");
+            filialP2 = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.println("Insira o novo custo entre " + matLogistica[filialP1][0] + " e " + matLogistica[filialP2][0] + ": ");
+            novoCusto = scanner.nextInt();
+            scanner.nextLine();
+
+            matCustoLog[filialP1][filialP2] = novoCusto;
+        } else {
+            insereFilial(matLogistica, maxTam);
+            atualizaCusto(matLogistica);
+        }
+
+    }
     public void insereCusto(float[][] matCustoLog, String[][] matLogistica, int maxTam){
         int filial1, filial2, custo, atualizar;
 
@@ -54,7 +86,7 @@ public class Logistica {
         System.out.print("Selecione as duas filiais pelo seu numero:\n");
 
         listaFiliais(matLogistica);
-        System.out.println("\n\nPrimeira filial: ");
+        System.out.println("Primeira filial: ");
         filial1 = scanner.nextInt();
         scanner.nextLine();
 
@@ -63,7 +95,7 @@ public class Logistica {
         scanner.nextLine();
 
         if(matCustoLog[filial1][filial2] != 0.0){
-            System.out.println("Ja existe um custo cadastrado para essas filiais. Atualizar cuusto?\n1. SIM | 2. NAO\nOpcao: ");
+            System.out.println("Ja existe um custo cadastrado para essas filiais. Atualizar custo?\n1. SIM | 2. NAO\nOpcao: ");
             atualizar = scanner.nextInt();
             scanner.nextLine();
 
@@ -113,7 +145,7 @@ public class Logistica {
                         "3. Lista filiais\n" +
                         "4. Lista destinos\n" +
                         "5. Lista origens\n" +
-                        "6. Atualiza movimentação\n" +
+                        "6. Atualiza custo de movimentação\n" +
                         "7. Remove filial\n" +
                         "8. Remove tempo\n" +
                         "9. Calcula custos\n" +
@@ -141,6 +173,11 @@ public class Logistica {
             case 3:
                 listaFiliais(matLogistica);
                 menuLogistica();
+                break;
+            case 6:
+                atualizaCusto(matLogistica);
+                menuLogistica();
+                break;
             case 7:
                 removeFilial(matLogistica, maxTam);
                 menuLogistica();
