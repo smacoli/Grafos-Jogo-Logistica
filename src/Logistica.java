@@ -83,7 +83,7 @@ public class Logistica {
             System.out.println("Custo inserido com sucesso.");
         }
     }
-    public void atualizaCusto(String[][] matLogistica){
+    public void atualizaMovimentacao(String[][] matLogistica){
         int filialP1, filialP2, novoCusto, escolha;
 
         System.out.print("::::::::::Atualizar Custo de Deslocamento::::::::::\n");
@@ -111,7 +111,7 @@ public class Logistica {
             matCustoLog[filialP1][filialP2] = novoCusto;
         } else {
             insereFilial(matLogistica, maxTam);
-            atualizaCusto(matLogistica);
+            atualizaMovimentacao(matLogistica);
         }
 
     }
@@ -206,7 +206,7 @@ public class Logistica {
                 menuLogistica();
                 break;
             case 6:
-                atualizaCusto(matLogistica);
+                atualizaMovimentacao(matLogistica);
                 menuLogistica();
                 break;
             case 7:

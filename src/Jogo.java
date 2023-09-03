@@ -83,7 +83,7 @@ public class Jogo {
             System.out.println("Custo inserido com sucesso.");
         }
     }
-    public void atualizaCusto(String[][] matLogistica){
+    public void atualizaTempo(String[][] matLogistica){
         int filialP1, filialP2, novoCusto, escolha;
 
         System.out.print("::::::::::Atualizar Custo de Deslocamento::::::::::\n");
@@ -111,11 +111,11 @@ public class Jogo {
             matCustoJogo[filialP1][filialP2] = novoCusto;
         } else {
             insereLocalJogo(matLogistica, maxTam);
-            atualizaCusto(matLogistica);
+            atualizaTempo(matLogistica);
         }
 
     }
-    public void calculaCustosLocais(float[][] matCustoJogo, int maxTam){
+    public void calculaTemposLocais(float[][] matCustoJogo, int maxTam){
         int custoTotal = 0;
 
         for(int i = 0; i < maxTam; i++){
@@ -138,6 +138,7 @@ public class Jogo {
             }
         }
     }
+    public void listaLocaisOrigem(){}
     public void removeLocal(String[][] matJogo, int maxTam){
         int deletaLocal;
 
@@ -153,7 +154,8 @@ public class Jogo {
 
         listaLocais(matJogo);
 
-    }
+    }\
+    public void removeTempo(){}
     public void menuJogo(){
         int opc;
 
@@ -206,14 +208,14 @@ public class Jogo {
                 menuJogo();
                 break;
             case 6:
-                atualizaCusto(matJogo);
+                atualizaTempo(matJogo);
                 menuJogo();
                 break;
             case 7:
                 removeLocal(matJogo, maxTam);
                 menuJogo();
             case 9:
-                calculaCustosLocais(matCustoJogo, maxTam);
+                calculaTemposLocais(matCustoJogo, maxTam);
         }
     }
 }
