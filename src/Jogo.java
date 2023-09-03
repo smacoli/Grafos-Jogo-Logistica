@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Jogo {
-    Logistica logistica = new Logistica();
     Scanner scanner = new Scanner(System.in);
+    MenuPrincipal menuPrincipal = new MenuPrincipal();
     int maxTam = 100;
     String [][] matJogo = new String[maxTam][maxTam];
     float[][] matCustoJogo = new float[maxTam][maxTam];
@@ -116,6 +116,23 @@ public class Jogo {
         }
 
     }
+    public void removeTempo(String[][] matJogo){
+        int l1, l2;
+
+        System.out.println("::::::::::Remover tempo de deslocamento::::::::::\nEscolha quais os locais que deseja remover:");
+        listaLocais(matJogo);
+        System.out.println("Primeiro local:");
+        l1 = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Segundo local:");
+        l2 = scanner.nextInt();
+        scanner.nextLine();
+
+        matCustoJogo[l1][l2] = 0;
+
+        System.out.println("Custo de " + matJogo[l1][0] + " e " + matJogo[l2][0] + " removido com sucesso.");
+
+    }
     public void calculaTemposLocais(float[][] matCustoJogo, int maxTam){
         int custoTotal = 0;
 
@@ -199,7 +216,7 @@ public class Jogo {
                 int insereTempo = 1;
                 while (insereTempo == 1){
                     insereTempo(matCustoJogo, matJogo, maxTam);
-                    System.out.println("Inserir mais um tempo? 1. SIM | 2. NAO\\nOpcao: \"");
+                    System.out.println("Inserir mais um tempo? 1. SIM | 2. NAO\nOpcao: \"");
                     insereTempo = scanner.nextInt();
                     scanner.nextLine();
                 }
@@ -236,14 +253,14 @@ public class Jogo {
                 menuJogo();
                 break;
             case 7:
-                atualizaTempo(matJogo);
+                removeTempo(matJogo);
                 menuJogo();
                 break;
             case 8:
                 calculaTemposLocais(matCustoJogo, maxTam);
                 break;
             case 0:
-                Main.exibirMenuPrincipal(scanner, logistica, Jogo.this);
+                menuPrincipal.Menu();
                 break;
         }
     }

@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Logistica {
     Scanner scanner = new Scanner(System.in);
-    Jogo jogo = new Jogo()
+    MenuPrincipal menuPrincipal = new MenuPrincipal();
     int maxTam = 100;
     String [][] matLogistica = new String[maxTam][maxTam];
     float[][] matCustoLog = new float[maxTam][maxTam];
@@ -45,7 +45,7 @@ public class Logistica {
         }
         System.out.println("\n");
     }
-    public void insereCusto(float[][] matCustoLog, String[][] matLogistica, int maxTam){
+    public void insereCusto(float[][] matCustoLog, String[][] matLogistica){
         int filial1, filial2, custo, atualizar;
 
         System.out.print("::::::::::Inserir Custo de Deslocamento::::::::::\n");
@@ -129,7 +129,7 @@ public class Logistica {
         System.out.println("Custo de deslocamento entre todas as filiais = " + custoTotal);
     }
     public void listaFiliaisProximas(String[][] matLogistica, float[][] matCustoLog, int maxTam, int filialP1) {
-        System.out.println("Filiais próximas a " + matLogistica[filialP1][0] + ":\n");
+        System.out.println("Filiais próximas a " + matLogistica[filialP1][0] + ": ");
 
         for (int i = 0; i < maxTam; i++) {
             float custo = matCustoLog[filialP1][i];
@@ -139,7 +139,7 @@ public class Logistica {
             }
         }
     }
-    public void removeFilial(String[][] matLogistica, int maxTam){
+    public void removeFilial(String[][] matLogistica){
         int deletaFilial;
 
         System.out.println("::::::::::Remover Filial::::::::::\nProcure o numero da filial a ser removida: ");
@@ -155,6 +155,45 @@ public class Logistica {
         listaFiliais(matLogistica);
 
     }
+    public void removeCusto(String[][] matLogistica){
+        int l1, l2;
+
+        System.out.println("::::::::::Remover tempo de deslocamento::::::::::\nEscolha quais os locais que deseja remover:");
+        listaFiliais(matLogistica);
+        System.out.println("Primeira filial:");
+        l1 = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Segunda filial:");
+        l2 = scanner.nextInt();
+        scanner.nextLine();
+
+        matCustoLog[l1][l2] = 0;
+
+        System.out.println("Custo de " + matLogistica[l1][0] + " e " + matLogistica[l2][0] + " removido com sucesso.");
+
+    }
+    public void listaLocaisDestino(String[][] matLogistica, float[][] matCustoLog, int maxTam, int filialD1) {
+        System.out.println("Locais próximos a " + matLogistica[filialD1][0] + ":\n");
+
+        for (int i = 0; i < maxTam; i++) {
+            float custo = matCustoLog[filialD1][i];
+            if (custo != 0.0) {
+                String nomeLocal = matLogistica[i][0];
+                System.out.println(nomeLocal + ": " + custo + " km");
+            }
+        }
+    }
+    public void listaLocaisOrigem(String[][] matLogistica, float[][] matCustoLog, int maxTam, int filialO1){
+        System.out.println("Locais próximos a " + matLogistica[filialO1][0] + ":\n");
+
+        for (int i = 0; i < maxTam; i++) {
+            float custo = matCustoLog[i][filialO1];
+            if (custo != 0.0) {
+                String nomeLocal = matLogistica[i][0];
+                System.out.println(nomeLocal + ": " + custo + " minutos");
+            }
+        }
+    }
     public void menuLogistica(){
         int opc;
 
@@ -166,7 +205,7 @@ public class Logistica {
                         "5. Lista origens\n" +
                         "6. Atualiza custo de movimentação\n" +
                         "7. Remove filial\n" +
-                        "8. Remove tempo\n" +
+                        "8. Remove custo\n" +
                         "9. Calcula custos filiais\n" +
                         "0. Voltar ao menu inicial\n");
 
@@ -188,7 +227,7 @@ public class Logistica {
             case 2:
                 int insereCusto = 1;
                 while (insereCusto == 1){
-                    insereCusto(matCustoLog, matLogistica, maxTam);
+                    insereCusto(matCustoLog, matLogistica);
                     System.out.println("Inserir mais um custo? 1. SIM | 2. NAO\\nOpcao: \"");
                     insereCusto = scanner.nextInt();
                     scanner.nextLine();
@@ -206,19 +245,44 @@ public class Logistica {
                 listaFiliaisProximas(matLogistica, matCustoLog, maxTam, fil1);
                 menuLogistica();
                 break;
+            case 4:
+                int f1;
+                System.out.print("::::::::::Locais destino::::::::::\n");
+                listaFiliais(matLogistica);
+                System.out.println("Insira o nº do local: ");
+                f1 = scanner.nextInt();
+                scanner.nextLine();
+
+                listaLocaisDestino(matLogistica, matCustoLog, maxTam, f1);
+                menuLogistica();
+                break;
+            case 5:
+                int localD;
+                System.out.print("::::::::::Locais origem::::::::::\n");
+                listaFiliais(matLogistica);
+                System.out.println("Insira o nº do local: ");
+                localD = scanner.nextInt();
+                scanner.nextLine();
+
+                listaLocaisOrigem(matLogistica, matCustoLog, maxTam, localD);
+                menuLogistica();
+                break;
             case 6:
                 atualizaMovimentacao(matLogistica);
                 menuLogistica();
                 break;
             case 7:
-                removeFilial(matLogistica, maxTam);
+                removeFilial(matLogistica);
                 menuLogistica();
+                break;
+            case 8:
+                removeCusto(matLogistica);
                 break;
             case 9:
                 calculaCustosFiliais(matCustoLog, maxTam);
                 break;
             case 0:
-                Main.exibirMenuPrincipal(scanner, Logistica.this, jogo);
+                menuPrincipal.Menu();
                 break;
         }
     }
