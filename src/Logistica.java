@@ -127,7 +127,7 @@ public class Logistica {
             float custo = matCustoLog[filialP1][i];
             if (custo != 0.0) {
                 String nomeFilial = matLogistica[i][0];
-                System.out.println(nomeFilial + ": " + custo);
+                System.out.println(nomeFilial + ": " + custo + "km");
             }
         }
     }
@@ -193,7 +193,8 @@ public class Logistica {
                 break;
             case 3:
                 int fil1;
-                System.out.print("::::::::::Filiais::::::::::\n");
+                System.out.print("::::::::::Filiais proximas::::::::::\n");
+                listaFiliais(matLogistica);
                 System.out.println("Insira o nº da filial: ");
                 fil1 = scanner.nextInt();
                 scanner.nextLine();
