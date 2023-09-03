@@ -47,6 +47,7 @@ public class Logistica {
         System.out.println("\n");
     }
 
+
     public void atualizaCusto(String[][] matLogistica){
         int filialP1, filialP2, novoCusto, escolha;
 
@@ -86,11 +87,11 @@ public class Logistica {
         System.out.print("Selecione as duas filiais pelo seu numero:\n");
 
         listaFiliais(matLogistica);
-        System.out.println("Primeira filial: ");
+        System.out.println("Origem: ");
         filial1 = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.println("Segunda filial: ");
+        System.out.println("Destino: ");
         filial2 = scanner.nextInt();
         scanner.nextLine();
 
@@ -119,6 +120,20 @@ public class Logistica {
         }
     }
 
+    public void listaFiliaisProximas(String[][] matLogistica, float[][] matCustoLog, int maxTam, int filialP1) {
+        System.out.println("Filiais próximas a " + matLogistica[filialP1][0] + ":\n");
+
+        for (int i = 0; i < maxTam; i++) {
+            float custo = matCustoLog[filialP1][i];
+            if (custo != 0.0) {
+                String nomeFilial = matLogistica[i][0];
+                System.out.println(nomeFilial + ": " + custo);
+            }
+        }
+    }
+
+
+
     public void removeFilial(String[][] matLogistica, int maxTam){
         int deletaFilial;
 
@@ -142,7 +157,7 @@ public class Logistica {
         System.out.println("\n:::::::::: Menu Logistica ::::::::::");
         System.out.print("1. Insere filial\n" +
                         "2. Insere custo de movimentação\n" +
-                        "3. Lista filiais\n" +
+                        "3. Lista filiais proximas\n" +
                         "4. Lista destinos\n" +
                         "5. Lista origens\n" +
                         "6. Atualiza custo de movimentação\n" +
@@ -157,21 +172,33 @@ public class Logistica {
 
         switch (opc){
             case 1:
-                int insere = 1;
-                while (insere == 1) {
+                int insereFilial = 1;
+                while (insereFilial == 1) {
                     insereFilial(matLogistica, maxTam);
                     System.out.print("Inserir mais uma filial? 1. SIM | 2. NAO\nOpcao: ");
-                    insere = scanner.nextInt();
+                    insereFilial = scanner.nextInt();
                     scanner.nextLine();
                 }
                 menuLogistica();
                 break;
             case 2:
-                insereCusto(matCustoLog, matLogistica, maxTam);
+                int insereCusto = 1;
+                while (insereCusto == 1){
+                    insereCusto(matCustoLog, matLogistica, maxTam);
+                    System.out.println("Inserir mais um custo? 1. SIM | 2. NAO\\nOpcao: \"");
+                    insereCusto = scanner.nextInt();
+                    scanner.nextLine();
+                }
                 menuLogistica();
                 break;
             case 3:
-                listaFiliais(matLogistica);
+                int fil1;
+                System.out.print("::::::::::Filiais::::::::::\n");
+                System.out.println("Insira o nº da filial: ");
+                fil1 = scanner.nextInt();
+                scanner.nextLine();
+
+                listaFiliaisProximas(matLogistica, matCustoLog, maxTam, fil1);
                 menuLogistica();
                 break;
             case 6:
