@@ -6,7 +6,6 @@ public class Logistica {
     String [][] matLogistica = new String[maxTam][maxTam];
     float[][] matCustoLog = new float[maxTam][maxTam];
 
-
     public void insereFilial(String[][] matLogistica, int maxTam) {
         System.out.println("::::::::::Inserir Filial::::::::::\nInsira a filial: ");
         String filial = scanner.nextLine();
@@ -37,7 +36,6 @@ public class Logistica {
             }
         }
     }
-
     public void listaFiliais(String[][] matLogistica){
         for(int i = 0; i < maxTam; i++){
             if(matLogistica[i][0] != null){
@@ -46,7 +44,6 @@ public class Logistica {
         }
         System.out.println("\n");
     }
-
     public void insereCusto(float[][] matCustoLog, String[][] matLogistica, int maxTam){
         int filial1, filial2, custo, atualizar;
 
@@ -130,7 +127,6 @@ public class Logistica {
         }
         System.out.println("Custo de deslocamento entre todas as filiais = " + custoTotal);
     }
-
     public void listaFiliaisProximas(String[][] matLogistica, float[][] matCustoLog, int maxTam, int filialP1) {
         System.out.println("Filiais próximas a " + matLogistica[filialP1][0] + ":\n");
 
@@ -142,7 +138,6 @@ public class Logistica {
             }
         }
     }
-
     public void removeFilial(String[][] matLogistica, int maxTam){
         int deletaFilial;
 
@@ -159,7 +154,6 @@ public class Logistica {
         listaFiliais(matLogistica);
 
     }
-
     public void menuLogistica(){
         int opc;
 
