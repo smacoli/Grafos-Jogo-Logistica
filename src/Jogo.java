@@ -138,7 +138,17 @@ public class Jogo {
             }
         }
     }
-    public void listaLocaisOrigem(){}
+    public void listaLocaisOrigem(String[][] matJogo, float[][] matCustoJogo, int maxTam, int localO1){
+        System.out.println("Locais próximos a " + matJogo[localO1][0] + ":\n");
+
+        for (int i = 0; i < maxTam; i++) {
+            float custo = matCustoJogo[i][localO1];
+            if (custo != 0.0) {
+                String nomeLocal = matJogo[i][0];
+                System.out.println(nomeLocal + ": " + custo + " minutos");
+            }
+        }
+    }
     public void removeLocal(String[][] matJogo, int maxTam){
         int deletaLocal;
 
@@ -153,8 +163,7 @@ public class Jogo {
         System.out.println("Local removido com sucesso.\nLocais no sistema: ");
 
         listaLocais(matJogo);
-
-    }\
+    }
     public void removeTempo(){}
     public void menuJogo(){
         int opc;
@@ -162,13 +171,12 @@ public class Jogo {
         System.out.println("\n:::::::::: Menu Jogo ::::::::::");
         System.out.print("1. Insere local\n" +
                 "2. Insere tempo de movimentação\n" +
-                "3. Lista locais proximos\n" +
-                "4. Lista destinos\n" +
-                "5. Lista origens\n" +
-                "6. Atualiza tempo de movimentação\n" +
-                "7. Remove local\n" +
-                "8. Remove tempo\n" +
-                "9. Calcula custos locais\n" +
+                "3. Lista destinos\n" +
+                "4. Lista origens\n" +
+                "5. Atualiza tempo de movimentação\n" +
+                "6. Remove local\n" +
+                "7. Remove tempo\n" +
+                "8. Calcula custos locais\n" +
                 "0. Voltar ao menu inicial\n");
 
         System.out.println("Opção: ");
@@ -198,7 +206,7 @@ public class Jogo {
                 break;
             case 3:
                 int loc1;
-                System.out.print("::::::::::Locais proximos::::::::::\n");
+                System.out.print("::::::::::Locais destino::::::::::\n");
                 listaLocais(matJogo);
                 System.out.println("Insira o nº do local: ");
                 loc1 = scanner.nextInt();
@@ -207,6 +215,19 @@ public class Jogo {
                 listaLocaisDestino(matJogo, matCustoJogo, maxTam, loc1);
                 menuJogo();
                 break;
+            case 4:
+                int localD;
+                System.out.print("::::::::::Locais origem::::::::::\n");
+                listaLocais(matJogo);
+                System.out.println("Insira o nº do local: ");
+                localD = scanner.nextInt();
+                scanner.nextLine();
+
+                listaLocaisOrigem(matJogo, matCustoJogo, maxTam, localD);
+                menuJogo();
+                break;
+            case 5:
+
             case 6:
                 atualizaTempo(matJogo);
                 menuJogo();
