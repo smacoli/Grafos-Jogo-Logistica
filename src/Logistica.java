@@ -47,39 +47,6 @@ public class Logistica {
         System.out.println("\n");
     }
 
-
-    public void atualizaCusto(String[][] matLogistica){
-        int filialP1, filialP2, novoCusto, escolha;
-
-        System.out.print("::::::::::Atualizar Custo de Deslocamento::::::::::\n");
-        System.out.print("Selecione as duas filiais pelo seu numero:\n");
-
-        listaFiliais(matLogistica);
-
-        System.out.println("Nao encontrou a filial?\n1. Encontrei minha filial\n2. Inserir filial");
-        escolha = scanner.nextInt();
-        scanner.nextLine();
-
-        if(escolha == 1){
-            System.out.println("\n\nPrimeira filial: ");
-            filialP1 = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.println("Segunda filial: ");
-            filialP2 = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.println("Insira o novo custo entre " + matLogistica[filialP1][0] + " e " + matLogistica[filialP2][0] + ": ");
-            novoCusto = scanner.nextInt();
-            scanner.nextLine();
-
-            matCustoLog[filialP1][filialP2] = novoCusto;
-        } else {
-            insereFilial(matLogistica, maxTam);
-            atualizaCusto(matLogistica);
-        }
-
-    }
     public void insereCusto(float[][] matCustoLog, String[][] matLogistica, int maxTam){
         int filial1, filial2, custo, atualizar;
 
@@ -119,6 +86,50 @@ public class Logistica {
             System.out.println("Custo inserido com sucesso.");
         }
     }
+    public void atualizaCusto(String[][] matLogistica){
+        int filialP1, filialP2, novoCusto, escolha;
+
+        System.out.print("::::::::::Atualizar Custo de Deslocamento::::::::::\n");
+        System.out.print("Selecione as duas filiais pelo seu numero:\n");
+
+        listaFiliais(matLogistica);
+
+        System.out.println("Nao encontrou a filial?\n1. Encontrei minha filial\n2. Inserir filial");
+        escolha = scanner.nextInt();
+        scanner.nextLine();
+
+        if(escolha == 1){
+            System.out.println("\n\nPrimeira filial: ");
+            filialP1 = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.println("Segunda filial: ");
+            filialP2 = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.println("Insira o novo custo entre " + matLogistica[filialP1][0] + " e " + matLogistica[filialP2][0] + ": ");
+            novoCusto = scanner.nextInt();
+            scanner.nextLine();
+
+            matCustoLog[filialP1][filialP2] = novoCusto;
+        } else {
+            insereFilial(matLogistica, maxTam);
+            atualizaCusto(matLogistica);
+        }
+
+    }
+    public void calculaCustosFiliais(float[][] matCustoLog, int maxTam){
+        int custoTotal = 0;
+
+        for(int i = 0; i < maxTam; i++){
+            for(int j = 0; j < maxTam; j++){
+                if(matCustoLog[i][j] != 0.0){
+                    custoTotal += matCustoLog[i][j];
+                }
+            }
+        }
+        System.out.println("Custo de deslocamento entre todas as filiais = " + custoTotal);
+    }
 
     public void listaFiliaisProximas(String[][] matLogistica, float[][] matCustoLog, int maxTam, int filialP1) {
         System.out.println("Filiais próximas a " + matLogistica[filialP1][0] + ":\n");
@@ -131,8 +142,6 @@ public class Logistica {
             }
         }
     }
-
-
 
     public void removeFilial(String[][] matLogistica, int maxTam){
         int deletaFilial;
@@ -163,7 +172,7 @@ public class Logistica {
                         "6. Atualiza custo de movimentação\n" +
                         "7. Remove filial\n" +
                         "8. Remove tempo\n" +
-                        "9. Calcula custos\n" +
+                        "9. Calcula custos filiais\n" +
                         "0. Voltar ao menu inicial\n");
 
         System.out.println("Opção: ");
@@ -209,6 +218,8 @@ public class Logistica {
             case 7:
                 removeFilial(matLogistica, maxTam);
                 menuLogistica();
+            case 9:
+                calculaCustosFiliais(matCustoLog, maxTam);
         }
     }
 }
