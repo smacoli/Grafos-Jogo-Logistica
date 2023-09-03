@@ -9,18 +9,21 @@ public class Main {
         Logistica logistica = new Logistica();
         Jogo jogo = new Jogo();
 
-        System.out.println("::::::::::Menu principal::::::::::\n1. Modulo logistica\n2. Modo jogo\n3.Sair\nOpcao: ");
+        exibirMenuPrincipal(scanner, logistica, jogo);
+    }
+    public static void exibirMenuPrincipal(Scanner scanner, Logistica logistica, Jogo jogo) {
+        int modulo = 0;
+
+        System.out.println("::::::::::Menu principal::::::::::\n1. Modulo logistica\n2. Modo jogo\n3. Sair\nOpcao: ");
         modulo = scanner.nextInt();
         scanner.nextLine();
 
-        if(modulo == 1){
+        if (modulo == 1) {
             logistica.menuLogistica();
-        } else if (modulo == 2){
+        } else if (modulo == 2) {
             jogo.menuJogo();
         } else {
             System.out.println("Ate logo!");
         }
-
-
     }
 }

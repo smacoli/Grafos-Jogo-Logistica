@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Logistica {
     Scanner scanner = new Scanner(System.in);
+    Jogo jogo = new Jogo()
     int maxTam = 100;
     String [][] matLogistica = new String[maxTam][maxTam];
     float[][] matCustoLog = new float[maxTam][maxTam];
@@ -212,8 +213,13 @@ public class Logistica {
             case 7:
                 removeFilial(matLogistica, maxTam);
                 menuLogistica();
+                break;
             case 9:
                 calculaCustosFiliais(matCustoLog, maxTam);
+                break;
+            case 0:
+                Main.exibirMenuPrincipal(scanner, Logistica.this, jogo);
+                break;
         }
     }
 }

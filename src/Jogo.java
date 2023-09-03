@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Jogo {
+    Logistica logistica = new Logistica();
     Scanner scanner = new Scanner(System.in);
     int maxTam = 100;
     String [][] matJogo = new String[maxTam][maxTam];
@@ -229,15 +230,21 @@ public class Jogo {
             case 5:
                 atualizaTempo(matJogo);
                 menuJogo();
+                break;
             case 6:
-                atualizaTempo(matJogo);
+                removeLocal(matJogo, maxTam);
                 menuJogo();
                 break;
             case 7:
-                removeLocal(matJogo, maxTam);
+                atualizaTempo(matJogo);
                 menuJogo();
-            case 9:
+                break;
+            case 8:
                 calculaTemposLocais(matCustoJogo, maxTam);
+                break;
+            case 0:
+                Main.exibirMenuPrincipal(scanner, logistica, Jogo.this);
+                break;
         }
     }
 }
