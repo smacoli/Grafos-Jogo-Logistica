@@ -83,35 +83,35 @@ public class Jogo {
             System.out.println("Custo inserido com sucesso.");
         }
     }
-    public void atualizaTempo(String[][] matLogistica){
-        int filialP1, filialP2, novoCusto, escolha;
+    public void atualizaTempo(String[][] matJogo){
+        int localP1, localP2, novoTempo, escolha;
 
-        System.out.print("::::::::::Atualizar Custo de Deslocamento::::::::::\n");
-        System.out.print("Selecione as duas filiais pelo seu numero:\n");
+        System.out.print("::::::::::Atualizar tempo de Deslocamento::::::::::\n");
+        System.out.print("Selecione os dois locais pelo seu numero:\n");
 
-        listaLocais(matLogistica);
+        listaLocais(matJogo);
 
-        System.out.println("Nao encontrou a filial?\n1. Encontrei minha filial\n2. Inserir filial");
+        System.out.println("Nao encontrou seu local?\n1. Encontrei meu local\n2. Inserir local");
         escolha = scanner.nextInt();
         scanner.nextLine();
 
         if(escolha == 1){
-            System.out.println("\n\nPrimeira filial: ");
-            filialP1 = scanner.nextInt();
+            System.out.println("\n\nPrimeiro local: ");
+            localP1 = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.println("Segunda filial: ");
-            filialP2 = scanner.nextInt();
+            System.out.println("Segundo local: ");
+            localP2 = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.println("Insira o novo custo entre " + matLogistica[filialP1][0] + " e " + matLogistica[filialP2][0] + ": ");
-            novoCusto = scanner.nextInt();
+            System.out.println("Insira o novo tempo entre " + matJogo[localP1][0] + " e " + matJogo[localP2][0] + ": ");
+            novoTempo = scanner.nextInt();
             scanner.nextLine();
 
-            matCustoJogo[filialP1][filialP2] = novoCusto;
+            matCustoJogo[localP1][localP2] = novoTempo;
         } else {
-            insereLocalJogo(matLogistica, maxTam);
-            atualizaTempo(matLogistica);
+            insereLocalJogo(matJogo, maxTam);
+            atualizaTempo(matJogo);
         }
 
     }
@@ -227,7 +227,8 @@ public class Jogo {
                 menuJogo();
                 break;
             case 5:
-
+                atualizaTempo(matJogo);
+                menuJogo();
             case 6:
                 atualizaTempo(matJogo);
                 menuJogo();
