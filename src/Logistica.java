@@ -1,3 +1,4 @@
+import java.sql.Struct;
 import java.util.Scanner;
 
 public class Logistica {
@@ -45,7 +46,7 @@ public class Logistica {
         }
         System.out.println("\n");
     }
-    public void insereCusto(float[][] matCustoLog, String[][] matLogistica){
+    public void insereCusto(float[][] matCustoLog, String[][] matLogistica, int maxTam){ /* Insere Movimentação*/
         int filial1, filial2, custo, atualizar;
 
         System.out.print("::::::::::Inserir Custo de Deslocamento::::::::::\n");
@@ -59,6 +60,18 @@ public class Logistica {
         System.out.println("Destino: ");
         filial2 = scanner.nextInt();
         scanner.nextLine();
+
+        boolean filialNaoINserida = false;
+        for(int i = 0; i < maxTam; i++){
+            if (matLogistica[filial1][0] == null || matLogistica[filial2][0] == null){
+                filialNaoINserida = true;
+            }
+        }
+
+        if(filialNaoINserida == true){
+            System.out.println("Erro. Filial nao inserida.");
+            menuLogistica();
+        }
 
         if(matCustoLog[filial1][filial2] != 0.0){
             System.out.println("Ja existe um custo cadastrado para essas filiais. Atualizar custo?\n1. SIM | 2. NAO\nOpcao: ");
@@ -191,7 +204,7 @@ public class Logistica {
             float custo = matCustoLog[i][filialO1];
             if (custo != 0.0) {
                 String nomeLocal = matLogistica[i][0];
-                System.out.println(nomeLocal + ": " + custo + " minutos");
+                System.out.println(nomeLocal + ": R$" + custo);
             }
         }
     }
@@ -228,7 +241,7 @@ public class Logistica {
             case 2:
                 int insereCusto = 1;
                 while (insereCusto == 1){
-                    insereCusto(matCustoLog, matLogistica);
+                    insereCusto(matCustoLog, matLogistica, maxTam);
                     System.out.println("Inserir mais um custo? 1. SIM | 2. NAO\nOpcao: ");
                     insereCusto = scanner.nextInt();
                     scanner.nextLine();

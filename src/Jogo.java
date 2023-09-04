@@ -226,7 +226,7 @@ public class Jogo {
                 int loc1;
                 System.out.print("::::::::::Locais destino::::::::::\n");
                 listaLocais(matJogo);
-                System.out.println("Insira o nº do local: ");
+                System.out.println("Insira o nº do local de origem: ");
                 loc1 = scanner.nextInt();
                 scanner.nextLine();
 
@@ -258,6 +258,7 @@ public class Jogo {
                 break;
             case 8:
                 calculaTemposLocais(matCustoJogo, maxTam);
+                menuJogo();
                 break;
             case 0:
                 menuPrincipal.Menu();
