@@ -97,11 +97,11 @@ public class Logistica {
         scanner.nextLine();
 
         if(escolha == 1){
-            System.out.println("\n\nPrimeira filial: ");
+            System.out.println("Filial origem: ");
             filialP1 = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.println("Segunda filial: ");
+            System.out.println("Filial destino: ");
             filialP2 = scanner.nextInt();
             scanner.nextLine();
 
@@ -110,11 +110,12 @@ public class Logistica {
             scanner.nextLine();
 
             matCustoLog[filialP1][filialP2] = novoCusto;
+
+            System.out.println("Custo atualizado com sucesso.\n" + filialP1 + " - " + filialP2 + " = " + matCustoLog[filialP1][filialP2]);
         } else {
             insereFilial(matLogistica, maxTam);
             atualizaMovimentacao(matLogistica);
         }
-
     }
     public void calculaCustosFiliais(float[][] matCustoLog, int maxTam){
         int custoTotal = 0;
@@ -158,7 +159,7 @@ public class Logistica {
     public void removeCusto(String[][] matLogistica){
         int l1, l2;
 
-        System.out.println("::::::::::Remover tempo de deslocamento::::::::::\nEscolha quais os locais que deseja remover:");
+        System.out.println("::::::::::Remover custo de deslocamento::::::::::\nEscolha quais os locais que deseja remover:");
         listaFiliais(matLogistica);
         System.out.println("Primeira filial:");
         l1 = scanner.nextInt();
@@ -169,7 +170,7 @@ public class Logistica {
 
         matCustoLog[l1][l2] = 0;
 
-        System.out.println("Custo de " + matLogistica[l1][0] + " e " + matLogistica[l2][0] + " removido com sucesso.");
+        System.out.println("Custo entre " + matLogistica[l1][0] + " e " + matLogistica[l2][0] + " removido com sucesso.");
 
     }
     public void listaLocaisDestino(String[][] matLogistica, float[][] matCustoLog, int maxTam, int filialD1) {
@@ -228,7 +229,7 @@ public class Logistica {
                 int insereCusto = 1;
                 while (insereCusto == 1){
                     insereCusto(matCustoLog, matLogistica);
-                    System.out.println("Inserir mais um custo? 1. SIM | 2. NAO\\nOpcao: \"");
+                    System.out.println("Inserir mais um custo? 1. SIM | 2. NAO\nOpcao: ");
                     insereCusto = scanner.nextInt();
                     scanner.nextLine();
                 }
@@ -249,7 +250,7 @@ public class Logistica {
                 int f1;
                 System.out.print("::::::::::Locais destino::::::::::\n");
                 listaFiliais(matLogistica);
-                System.out.println("Insira o nº do local: ");
+                System.out.println("Insira o nº do local de origem: ");
                 f1 = scanner.nextInt();
                 scanner.nextLine();
 
@@ -277,9 +278,11 @@ public class Logistica {
                 break;
             case 8:
                 removeCusto(matLogistica);
+                menuLogistica();
                 break;
             case 9:
                 calculaCustosFiliais(matCustoLog, maxTam);
+                menuLogistica();
                 break;
             case 0:
                 menuPrincipal.Menu();

@@ -8,7 +8,7 @@ public class MenuPrincipal {
 
         int modulo = 0;
 
-        System.out.println("::::::::::Menu principal::::::::::\n1. Modulo logistica\n2. Modo jogo\n3.Sair\nOpcao: ");
+        System.out.println("\n\n::::::::::Menu principal::::::::::\n1. Modulo logistica\n2. Modo jogo\n3.Sair\nOpcao: ");
         modulo = scanner.nextInt();
         scanner.nextLine();
 
