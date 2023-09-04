@@ -18,6 +18,7 @@ public class MenuPrincipal {
             jogo.menuJogo();
         } else {
             System.out.println("Ate logo!");
+            System.exit(1);
         }
     }
 }

@@ -60,6 +60,18 @@ public class Jogo {
         local2 = scanner.nextInt();
         scanner.nextLine();
 
+        boolean localNaoInserido = false;
+        for(int i = 0; i < maxTam; i++){
+            if (matJogo[local1][0] == null || matJogo[local2][0] == null){
+                localNaoInserido = true;
+            }
+        }
+
+        if(localNaoInserido == true){
+            System.out.println("Erro. Local nao inserido.");
+            menuJogo();
+        }
+
         if(matCustoJogo[local1][local2] != 0.0){
             System.out.println("Ja existe um tempo cadastrado para esses locais. Atualizar tempo?\n1. SIM | 2. NAO\nOpcao: ");
             atualizar = scanner.nextInt();
@@ -146,6 +158,19 @@ public class Jogo {
         System.out.println("Tempo de deslocamento entre todos os locais = " + custoTotal);
     }
     public void listaLocaisDestino(String[][] matJogo, float[][] matCustoJogo, int maxTam, int localP1) {
+
+        boolean localNaoInserido = false;
+        for(int i = 0; i < maxTam; i++){
+            if (matJogo[localP1][0] == null){
+                localNaoInserido = true;
+            }
+        }
+
+        if(localNaoInserido == true){
+            System.out.println("Erro. Local nao inserido.");
+            menuJogo();
+        }
+
         System.out.println("Locais próximos a " + matJogo[localP1][0] + ":\n");
 
         for (int i = 0; i < maxTam; i++) {
@@ -157,6 +182,19 @@ public class Jogo {
         }
     }
     public void listaLocaisOrigem(String[][] matJogo, float[][] matCustoJogo, int maxTam, int localO1){
+
+        boolean localNaoInserido = false;
+        for(int i = 0; i < maxTam; i++){
+            if (matJogo[localO1][0] == null){
+                localNaoInserido = true;
+            }
+        }
+
+        if(localNaoInserido == true){
+            System.out.println("Erro. Local nao inserido.");
+            menuJogo();
+        }
+
         System.out.println("Locais próximos a " + matJogo[localO1][0] + ":\n");
 
         for (int i = 0; i < maxTam; i++) {

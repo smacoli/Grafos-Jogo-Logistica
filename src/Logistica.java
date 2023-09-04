@@ -187,6 +187,19 @@ public class Logistica {
 
     }
     public void listaLocaisDestino(String[][] matLogistica, float[][] matCustoLog, int maxTam, int filialD1) {
+
+        boolean filialNaoINserida = false;
+        for(int i = 0; i < maxTam; i++){
+            if (matLogistica[filialD1][0] == null){
+                filialNaoINserida = true;
+            }
+        }
+
+        if(filialNaoINserida == true){
+            System.out.println("Erro. Filial nao inserida.");
+            menuLogistica();
+        }
+
         System.out.println("Locais próximos a " + matLogistica[filialD1][0] + ":\n");
 
         for (int i = 0; i < maxTam; i++) {
@@ -198,6 +211,19 @@ public class Logistica {
         }
     }
     public void listaLocaisOrigem(String[][] matLogistica, float[][] matCustoLog, int maxTam, int filialO1){
+
+        boolean filialNaoINserida = false;
+        for(int i = 0; i < maxTam; i++){
+            if (matLogistica[filialO1][0] == null){
+                filialNaoINserida = true;
+            }
+        }
+
+        if(filialNaoINserida == true){
+            System.out.println("Erro. Filial nao inserida.");
+            menuLogistica();
+        }
+
         System.out.println("Locais próximos a " + matLogistica[filialO1][0] + ":\n");
 
         for (int i = 0; i < maxTam; i++) {
