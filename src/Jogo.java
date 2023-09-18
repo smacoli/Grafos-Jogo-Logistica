@@ -206,18 +206,20 @@ public class Jogo {
         }
     }
     public void removeLocal(String[][] matJogo, int maxTam){
-        int deletaLocal;
+        String deletaLocal;
 
-        System.out.println("::::::::::Remover local::::::::::\nProcure o numero do local a ser removido: ");
+        System.out.println("::::::::::Remover local::::::::::\nProcure o nome do local a ser removido: ");
         listaLocais(matJogo);
-        System.out.println("\nDeletar local nº: ");
-        deletaLocal = scanner.nextInt();
-        scanner.nextLine();
+        System.out.println("\nInsira o nome do local a ser excluidoº: ");
+        deletaLocal = scanner.nextLine();
 
-        matJogo[deletaLocal][0] = null;
+        for(int i = 0; i < maxTam; i++) {
+            if (deletaLocal.equals(matJogo[i][0])) {
+                matJogo[i][0] = null;
+            }
+        }
 
         System.out.println("Local removido com sucesso.\nLocais no sistema: ");
-
         listaLocais(matJogo);
     }
     public void removeTempo(){}

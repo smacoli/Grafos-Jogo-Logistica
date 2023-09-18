@@ -153,21 +153,21 @@ public class Logistica {
             }
         }
     }
-    public void removeFilial(String[][] matLogistica){
-        int deletaFilial;
+    public void removeFilial(String[][] matLogistica, int maxTam){
+        String deletaFilial;
 
-        System.out.println("::::::::::Remover Filial::::::::::\nProcure o numero da filial a ser removida: ");
+        System.out.println("::::::::::Remover Filial::::::::::\nProcure o nome da filial a ser removida: ");
         listaFiliais(matLogistica);
-        System.out.println("\nDeletar filial nº: ");
-        deletaFilial = scanner.nextInt();
-        scanner.nextLine();
+        System.out.println("\nInsira o nome da filial a ser excluida: ");
+        deletaFilial = scanner.nextLine();
 
-        matLogistica[deletaFilial][0] = null;
-
+        for(int i = 0; i < maxTam; i++) {
+            if (deletaFilial.equals(matLogistica[i][0])) {
+                matLogistica[i][0] = null;
+            }
+        }
         System.out.println("Filial removida com sucesso.\nFiliais no sistema: ");
-
         listaFiliais(matLogistica);
-
     }
     public void removeCusto(String[][] matLogistica){
         int l1, l2;
@@ -312,7 +312,7 @@ public class Logistica {
                 menuLogistica();
                 break;
             case 7:
-                removeFilial(matLogistica);
+                removeFilial(matLogistica, maxTam);
                 menuLogistica();
                 break;
             case 8:
